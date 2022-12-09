@@ -12,7 +12,6 @@ const Home = () => {
   const callGenerateEndpoint = async () => {
     setIsGenerating(true);
 
-    console.log("Calling OpenAI...");
     const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
@@ -23,14 +22,12 @@ const Home = () => {
 
     const data = await response.json();
     const { output } = data;
-    console.log("OpenAI replied...", output.text);
 
     setApiOutput(`${output.text}`);
     setIsGenerating(false);
   };
 
   const onUserChangedText = (event) => {
-    console.log(event.target.value);
     setUserInput(event.target.value);
   };
 
@@ -45,7 +42,10 @@ const Home = () => {
             <h1>Personalized life advice from your AI friend, Larai.</h1>
           </div>
           <div className="header-subtitle">
-            <h2>In one sentence, tell Larai your current problem.</h2>
+            <h2>
+              In one sentence, tell Larai your current problem. <br />
+              Please be patient while she types back...
+            </h2>
           </div>
         </div>
         <div className="prompt-container">
